@@ -76,11 +76,13 @@
     
 
 ### Pycharm 전용 .gitignore 링크
-https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+##### https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 ### Django 환경 변수 관리 
-https://django-environ.readthedocs.io/en/latest/
+##### https://django-environ.readthedocs.io/en/latest/ 참고
     
-    # SECRET KEY 관리를 위한 pragmatic/pragmatic/settings.py 추가 
+* SECRET KEY 관리를 위한 pragmatic/pragmatic/settings.py 추가
+  
+
     import os,environ
     env = environ.Env(
         # set casting, default value
@@ -92,10 +94,14 @@ https://django-environ.readthedocs.io/en/latest/
         env_file=os.path.join(BASE_DIR,'.env')
     )
     SECRET_KEY = env('SECRET_KEY')
-    # pragmatic/.env 생성
+
+* pragmatic/.env 생성
+  
+
     DEBUG=on
     SECRET_KEY=[pragmatic/pragmatic/settings.py의 SECRET_KEY로 변경]
     DATABASE_URL=psql://urser:un-githubbedpassword@127.0.0.1:8458/database
     SQLITE_URL=sqlite:///my-local-sqlite.db
     CACHE_URL=memcache://127.0.0.1:11211,127.0.0.1:11212,127.0.0.1:11213
     REDIS_URL=rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=ungithubbed-secret
+
