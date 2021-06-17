@@ -195,3 +195,76 @@
     STATICFILES_DIRS = [
         BASE_DIR / "static"
     ]
+
+* pragmatic/static/base.css 생성
+
+
+    .pragmatic_logo{
+        font-family: 'Do Hyeon', sans-serif;
+    }
+    .pragmatic_footer_button{
+        font-size: .6rem ;
+    }
+    .pragmatic_footer{
+        text-align: center; margin-top: 2rem;
+    }
+    .pragmatic_header{
+        text-align: center; margin: 2rem 0;
+    }
+
+* head 부분 추가
+  
+
+    <!--  DEFAULT CSS LINK  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+
+* div와 같은 태그 부분
+
+  
+    <div class="pragmatic_header">
+
+    </div>
+
+
+<h4 style="color: red;"># css가 브라우저에서 적용되지 않을때</h3>
+
+    html 이나 CSS 같은 파일들은 정적이라, 브라우저 자체 캐쉬를 해놓는 경우가 많다보니 브라우저에 적용되지 않는 현상이 발생함.
+    하지만 정적이라고 해도 개발중에는 수시로 바뀔수 있는 파일이라 종종 보게 되는 현상
+    
+    개발을 할때 이런 현상을 방지하는 방법입니다.
+    
+    일단 개발중일때는, F12를 눌러 개발자탭을 활성화하고 개발자탭 중에서 Network 에서 Disable Cache 버튼을 활성화
+    이런 설정을 통해, 개발을 하는 도중에는 항상 CSS 가 캐쉬되지 않고, 새로이 서버에서 불러온 파일을 사용하게 됨.
+
+* css 적용 우선 순위
+  
+
+  `1. <div style=""></div>`<br>
+  `2. <style></style>`<br>
+  `3. css 파일`<br>
+  
+<hr>
+
+#### Model,DB 연동
+* pragmatic/accountapp/models.py
+
+
+    from django.db import models
+    
+    class HelloWorld(models.Model):
+        text = models.CharField(max_length=255,null=False)
+* Terminal
+  
+
+    python manage.py makemigrations # models.py와 db를 연동시키기 위한 파이썬 파일을 만들어줌
+    python manage.py migrate        # models.py와 db를 연동
+
+* pragmatic/pragmatic/settings.py 에서 연결할 db를 확인 가능하다.
+
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
