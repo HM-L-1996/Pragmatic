@@ -182,3 +182,16 @@
   
   
     <div style="font-family: 'Do Hyeon', sans-serif;">
+
+<hr>
+
+#### Static 설정 및 CSS 파일 분리
+
+* pragmatic/pragmatic/settings.py
+  
+
+    STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+    
+    STATICFILES_DIRS = [
+        BASE_DIR / "static"
+    ]
