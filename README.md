@@ -138,7 +138,7 @@
         },
     ]
 
-'DIRS':[ ]을 'DIRS': [os.path.join(BASE_DIR,'templates')] 수정하여 templates 디렉토리의 하위 파일들을 연결
+    'DIRS':[ ]을 'DIRS': [os.path.join(BASE_DIR,'templates')] 수정하여 templates 디렉토리의 하위 파일들을 연결 
 
 * pragmatic/pragmatic/views.py 수정
   
@@ -148,4 +148,5 @@
     
     
     def hello_world(request):
-        return render(request,'base.html')
+        return render(request,'base.html')  # base.html을 request에 포함시켜 반환
+
