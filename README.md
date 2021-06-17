@@ -1,7 +1,7 @@
 # 작정하고 장고! Django로 Pinterest 따라만들기 : 바닥부터 배포까지 정리!!
 <hr>
 
-## django 개발 패턴
+## Django 개발 패턴
 
 **M** odel  <br>
 **V** iew  <br>
@@ -30,6 +30,13 @@
     데이터가 저장되는 곳,쉽게 연결하기 위해서 만들어진 곳
 
 <hr>
+
+## Django CRUD 기능
+**C**reate<br>
+**R**ead<br>
+**U**pdat<br>
+**D**elete<br> 
+이 작업들에 최적화 되어있는 **C**lass  **B**ased **V**iew를 제공
 
 ## 개발환경 구축 (pycharm)
     * 터미널에서 실행
