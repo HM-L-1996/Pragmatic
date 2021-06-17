@@ -108,9 +108,9 @@
 <hr>
 
 ### Django Template
-* extends<br>
+* **extends**<br>
   미리 만들어 놓은 Html 파일을 가져와서 이것을  **바탕**으로 Html의 Block들을 채워나간다.
-* include<br>
+* **include**<br>
   만들고 있는 Html 파일이 있다고 할 때 거기에 조그만한 **조각**을 Html에 채워넣음
 #### 적용해보기  
 * pragmatic/templates 디렉토리 생성
@@ -236,7 +236,7 @@
     일단 개발중일때는, F12를 눌러 개발자탭을 활성화하고 개발자탭 중에서 Network 에서 Disable Cache 버튼을 활성화
     이런 설정을 통해, 개발을 하는 도중에는 항상 CSS 가 캐쉬되지 않고, 새로이 서버에서 불러온 파일을 사용하게 됨.
 
-* css 적용 우선 순위
+* **css 적용 우선 순위**
   
 
   `1. <div style=""></div>`<br>
@@ -253,7 +253,7 @@
     
     class HelloWorld(models.Model):
         text = models.CharField(max_length=255,null=False)
-* Terminal
+* 터미널에서 실행
   
 
     python manage.py makemigrations # models.py와 db를 연동시키기 위한 파이썬 파일을 만들어줌
@@ -268,3 +268,48 @@
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+#### HTTP 프로토콜 GET,POST
+server에 request 할 때 제공해야 하는 data를 보낼 때 쓰는 method
+* **GET**
+  
+    
+    클라이언트의 데이터를 URL 뒤에 붙여서 보낸다.
+    보통 조회를 할 때 GET 방식을 이용
+    ex) https://onion.haus/?param1=value1  
+    ? 마크를 통해 URL의 끝을 알리면서 데이터 표현의 시작점을 알린다.
+    데이터는 key 와 value 쌍으로 넣어야 한다. 위의 예시에서는 param1이라는 key에 value1이라는 value를 전송했다.
+* **POST**
+
+
+    데이터 전송을 기반으로 한 request method
+    보통 생성,수정을 할 때 POST 방식을 이용
+    ex) https://onion.haus/ 의 POST에 BODY를 추가적으로 데이터를 넣어 보냄
+* 적용해보기
+
+
+    * pragmatic/accountapp/templates/accountapp/hello_world
+    <form action="/account/hello_world/" method="post">
+            {% csrf_token %} 
+            //csrf_token을 통해서, 우리 사이트 이외의 다른 사이트에서 HTTP 요청을 보내는 경우 유효하지 않은 요청이라 판단해서 403 에러를 내면서 요청을 거부함  
+            <input type="submit" class="btn btn-primary" value="POST">
+    </form>
+    <h1>
+        {{ text }}
+    </h1>
+
+    * pragmatic/accountapp/views.py    
+
+    from django.http import HttpResponse
+    from django.shortcuts import render
+
+
+    def hello_world(request):
+
+        if request.method == "POST":
+            return render(request,'accountapp/hello_world.html',context={'text':'POST METHOD!!'})
+        else:
+            return render(request, 'accountapp/hello_world.html', context={'text': 'GET METHOD!!'})
+
+    POST 버튼을 누르게 되면 POST METHOD!!라는 텍스트가 출력되고 
+    http://127.0.0.1:8000/account/hello_world/에 접속하게 되면 GET METHOD!!라는 텍스트가 출력됨 
