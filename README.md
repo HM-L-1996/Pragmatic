@@ -29,13 +29,6 @@
   <br>
     user ----request----> server  <br>
     user <----response---- server  <br>
-    <br>
-    server  <br>
-  
-        Check if authenticated  
-        Check request valid 
-        Collect data from DB  
-        Render response  
     
 * Template  <br>
     HTML,JS,CSS 같은 프론트엔드와 밀접하게 관련이 있다.<br>
@@ -60,7 +53,7 @@
     
         # pragmatic/accountapp/views.py 
             def hello_world(request):
-                return HttpResponse('Hello world!')
+                return HttpResponse('Hello world!') #Response를 직접 만들어서 Hello world를 반환
         
         # pragmatic/pragmatic/urls.py urlpatterns에 path('account/',include('accountapp.urls')) 추가 accountapp 내부에 있는 urls.py를 참고해서 그 안에서 다시 분기를 하기 위해
         # pragmatic/accountapp/urls.py 생성
@@ -105,3 +98,54 @@
     CACHE_URL=memcache://127.0.0.1:11211,127.0.0.1:11212,127.0.0.1:11213
     REDIS_URL=rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=ungithubbed-secret
 
+### Django Template
+* extends<br>
+  미리 만들어 놓은 Html 파일을 가져와서 이것을  **바탕**으로 Html의 Block들을 채워나간다.
+* include<br>
+  만들고 있는 Html 파일이 있다고 할 때 거기에 조그만한 **조각**을 Html에 채워넣음
+#### 적용해보기  
+* pragmatic/templates 디렉토리 생성
+* pragmatic/templates/base.html 생성
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        Hello worlds!
+    </body>
+    </html>
+
+* pragmatic/setting.py 
+
+
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+
+'DIRS':[ ]을 'DIRS': [os.path.join(BASE_DIR,'templates')] 수정하여 templates 디렉토리의 하위 파일들을 연결
+
+* pragmatic/pragmatic/views.py 수정
+  
+
+    from django.http import HttpResponse
+    from django.shortcuts import render
+    
+    
+    def hello_world(request):
+        return render(request,'base.html')
