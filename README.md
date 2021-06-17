@@ -1,19 +1,5 @@
-# 작정하고 장고! Django로 Pinterest 따라만들기 : 바닥부터 배포까지
+# 작정하고 장고! Django로 Pinterest 따라만들기 : 바닥부터 배포까지 정리!!
 <hr>
-
-## 개발환경 구축 (pycharm)
-    * 터미널에서 실행
-     django library 설치
-     # pip install django
-     django project 생성
-     # django-admin startproject 프로젝트명(필자는 Pragmatic이라 칭함) 
-     
-     장고 프로젝트에 들어가면 터미널에서 venv 설정이 안되어있음. 
-     setting - Project: Pragmatic - Python Interpreter - configuration(톱니바퀴) add - ok
-     다시 터미널에 접속하면 venv 설정이 되어있고 
-     # pip list 시 django가 없음(독자적인 가상환경이여서 존재하지 않음)
-     # pip install django
-     # python manage.py runserver 로 실행되는지 테스트
 
 ## django 개발 패턴
 
@@ -34,8 +20,7 @@
     HTML,JS,CSS 같은 프론트엔드와 밀접하게 관련이 있다.<br>
     ex) User ----HTML---> Server<br>
          HTML 내부에서 게시글을 구현해줄 작업이 필요하다. HTML은 정적인 언어이기 때문에 동적으로 만들어주는게 Template<br>
-    
-    
+  
 
     django
     
@@ -44,7 +29,26 @@
     인증,계산,확인 관련 작업
     데이터가 저장되는 곳,쉽게 연결하기 위해서 만들어진 곳
 
-    
+<hr>
+
+## 개발환경 구축 (pycharm)
+    * 터미널에서 실행
+     django library 설치
+     # pip install django
+     django project 생성
+     # django-admin startproject 프로젝트명(필자는 Pragmatic이라 칭함) 
+     
+     장고 프로젝트에 들어가면 터미널에서 venv 설정이 안되어있음. 
+     setting - Project: Pragmatic - Python Interpreter - configuration(톱니바퀴) add - ok
+     다시 터미널에 접속하면 venv 설정이 되어있고 
+     # pip list 시 django가 없음(독자적인 가상환경이여서 존재하지 않음)
+     # pip install django
+     # python manage.py runserver 로 실행되는지 테스트
+
+
+<hr>
+
+
 ### 첫 앱 시작, 기본적인 view 만들기
 * 첫 앱 생성 <br>
   
@@ -67,6 +71,9 @@
             ]
 ##### http://127.0.0.1:8000/account/hello_world/ 접속시 Hello world! 출력
     
+
+<hr>
+
 
 ### Pycharm 전용 .gitignore 링크
 ##### https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
@@ -97,6 +104,8 @@
     SQLITE_URL=sqlite:///my-local-sqlite.db
     CACHE_URL=memcache://127.0.0.1:11211,127.0.0.1:11212,127.0.0.1:11213
     REDIS_URL=rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=ungithubbed-secret
+
+<hr>
 
 ### Django Template
 * extends<br>
@@ -150,3 +159,26 @@
     def hello_world(request):
         return render(request,'base.html')  # base.html을 request에 포함시켜 반환
 
+<hr>
+
+#### Bootstrap,Font 적용하기
+
+* head 부분
+  
+
+    <head>
+      <meta charset="UTF-8">
+      <title>Pragmatic</title>
+  
+      <!--  Bootstrap Link  -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+      <!--  GOOGLE FONTS LINK  -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    </head>
+
+* div와 같은 태그 부분
+  
+  
+    <div style="font-family: 'Do Hyeon', sans-serif;">
