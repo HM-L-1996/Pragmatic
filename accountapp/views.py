@@ -36,7 +36,7 @@ class AccountUpdateView(UpdateView):
     model = User
     context_object_name = 'target_user'
     form_class = AccountUpdateForm
-    success_url = reverse_lazy('accountapp:hello_world')  # class용 reverse 함수
+    success_url = reverse_lazy('accountapp:list')  # class용 reverse 함수
     template_name = 'accountapp/update.html'
 
 @method_decorator(has_ownership, 'get')
